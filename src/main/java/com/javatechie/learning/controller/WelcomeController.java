@@ -10,6 +10,7 @@ public class WelcomeController {
 
     @GetMapping("/greetings/{name}")
     public String greetings(@PathVariable String name){
+        name = name.split(" ")[0];
         return "Hello "+name+" Congratulations you have successfully completed learning jenkins CI/CD demo!";
     }
 
