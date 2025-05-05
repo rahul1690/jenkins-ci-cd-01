@@ -58,11 +58,11 @@ pipeline{
 <body>
 <p>Build Status : ${BUILD_STATUS}</p>
 <p>Build Number : ${BUILD_NUMBER}</p>
-<p>Docker Image : $IMAGE_NAME}:${IMAGE_TAG}</p>
+<p>Docker Image : ${env.IMAGE_NAME}:${env.IMAGE_TAG}</p>
 <p>Check the <a href=${BUILD_URL}>console output</a></p>
 </body>
 </html>''',
-mimeType: 'text/html', replyTo: 'rahb78205@gmail.com', subject: 'Pipeline Status: $IMAGE_NAME}:${IMAGE_TAG}', to: 'rahb78205@gmail.com'
+mimeType: 'text/html', replyTo: 'rahb78205@gmail.com', subject: 'Pipeline Status: ${env.IMAGE_NAME}:${env.IMAGE_TAG}', to: 'rahb78205@gmail.com'
         }
     }
 
