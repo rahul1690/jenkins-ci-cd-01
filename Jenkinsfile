@@ -6,6 +6,14 @@ pipeline{
         maven "maven"
     }
 
+    environment{
+        APP_NAME : "spring-docker-cicd"
+        RELEASE_NO : "1.0.0"
+        DOCKER_USER : "rahulbhoje09"
+        IMAGE_NAME : "${DOCKER_USER}/${APP_NAME}"
+        IMAGE_TAG : "${RELEASE_NO}-${BUILD_NUMBER}"
+    }
+
     stages{
         stage("SCM checkout"){
             steps{
@@ -19,11 +27,17 @@ pipeline{
             }
         }
 
-        stage("Deploy to container"){
+//         stage("Deploy to container"){
+//             steps{
+//                 deploy adapters: [tomcat9(credentialsId: 'tomcat-pwd', path: '', url: 'http://localhost:9090')], contextPath: 'jenkinsCiCd', war: '**/*.war'
+//             }
+//         }
+       stage("Build Image"){
             steps{
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-pwd', path: '', url: 'http://localhost:9090')], contextPath: 'jenkinsCiCd', war: '**/*.war'
+                bat 'docker build %IMAGE_NAME%/%IMAGE_TAG%'
             }
-        }
+       }
+
 
     }
 
