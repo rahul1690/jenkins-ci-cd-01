@@ -34,7 +34,7 @@ pipeline{
 //         }
        stage("Build Image"){
             steps{
-                bat 'docker build %IMAGE_NAME%/%IMAGE_TAG%'
+                bat 'docker build %IMAGE_NAME%:%IMAGE_TAG%'
             }
        }
 
