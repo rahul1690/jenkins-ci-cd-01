@@ -40,6 +40,7 @@ pipeline{
 
        stage("Push IMAGE to DockerHub"){
            steps{
+//            can also add to start container->docker run -d -p 7979:8282 %IMAGE_NAME%:%IMAGE_TAG%
                  withCredentials([string(credentialsId: 'docker-cred', variable: 'docker-cred')]) {
                  bat 'docker login -u rahulbhoje09 -p %docker-cred%'
                  bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
@@ -57,11 +58,11 @@ pipeline{
 <body>
 <p>Build Status : ${BUILD_STATUS}</p>
 <p>Build Number : ${BUILD_NUMBER}</p>
-<p>Docker Image : %IMAGE_NAME%:%IMAGE_TAG%</p>
+<p>Docker Image : $IMAGE_NAME}:${IMAGE_TAG}</p>
 <p>Check the <a href=${BUILD_URL}>console output</a></p>
 </body>
 </html>''',
-mimeType: 'text/html', replyTo: 'rahb78205@gmail.com', subject: 'Pipeline Status: ${BUILD_NUMBER}', to: 'rahb78205@gmail.com'
+mimeType: 'text/html', replyTo: 'rahb78205@gmail.com', subject: 'Pipeline Status: $IMAGE_NAME}:${IMAGE_TAG}', to: 'rahb78205@gmail.com'
         }
     }
 
